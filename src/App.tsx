@@ -1,24 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Home from "./screens/Home";
+import About from "./screens/About";
+import './i18n';
+import i18n from "i18next";
+
 
 function App() {
+    const changeLanguage = (lng: string) => {
+        i18n.changeLanguage(lng);
+    }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App-header">
+          <BrowserRouter>
+              <div>
+              <button style={{marginRight: 10}} onClick={() => changeLanguage('ro')}>Ro</button>
+              <button onClick={() => changeLanguage('en')}>Eng</button>
+              </div>
+              <Routes>
+
+                  <Route path="/" element={<Home />} />
+
+                  <Route path="/about"  element={<About />} />
+
+
+              </Routes>
+          </BrowserRouter>
+
+
+
+      </div>
     </div>
   );
 }
